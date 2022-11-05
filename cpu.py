@@ -5,3 +5,6 @@ class CPUReading:
         self.cpu1 = cpu1
         self.cpu2 = cpu2
         self.cpu3 = cpu3
+
+    def print(self):
+        print(self.cpu_total)
