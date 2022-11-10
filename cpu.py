@@ -1,5 +1,5 @@
 class CPUReading:
-    def __init__(self,cpu_total, cpu0, cpu1, cpu2, cpu3, num_interrupts, num_context_switches):
+    def __init__(self, cpu_total={"user": 0, "sys" : 0, "idle" : 0}, cpu0={"user": 0, "sys" : 0, "idle" : 0}, cpu1={"user": 0, "sys" : 0, "idle" : 0}, cpu2={"user": 0, "sys" : 0, "idle" :  0}, cpu3={"user":  0, "sys" :  0, "idle" : 0}, num_interrupts = 0, num_context_switches = 0):
         self.cpu_total = cpu_total
         self.cpu0 = cpu0
         self.cpu1 = cpu1
