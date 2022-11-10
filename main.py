@@ -1,10 +1,6 @@
 # import os
 # import sys
 import time
-# import matplotlib.pyplot as plt
-# from matplotlib.animation import FuncAnimation
-
-
 from cpu import CPUReading
 
 
@@ -75,16 +71,20 @@ with open(PROC_FILEPATH, "r", encoding='UTF-8') as proc_file:
     #cpu_utilization --> [total, cpu0, cpu1, cpu2, cpu3]
     cpu_util = []
     inter= 0
-    for _ in range(3):
+    
+
+    for _ in range(4):
         time.sleep(INTERVAL_TIME)
         prev = curr
         curr = get_proc_stat_data(proc_file)
         inter = get_interval(prev,curr)
         cpu_stats_array = get_util_stats(prev,curr, inter)
-        print(f"cpu stats are: {cpu_stats_array[0:5]}")
-        print(f"number of interupts:{cpu_stats_array[5]}")
-        print(f"number of context switches {cpu_stats_array[6]}")
-        
+        cpu_percent = cpu_stats_array[0]["user"]
+        print(cpu_percent)
+    
+        # print(f"cpu stats are: {cpu_stats_array[0:5]}")
+        # print(f"number of interupts:{cpu_stats_array[5]}")
+        # print(f"number of context switches {cpu_stats_array[6]}")    
 
 
 
