@@ -6,18 +6,25 @@ import plotly
 import random
 import plotly.graph_objs as go
 from collections import deque
+from proc_reader import ProcStatReader
 
 INTERVAL_TIME = 2
 X = deque(maxlen = 10)
 X.append(1)
 
+
+
 Y = deque(maxlen = 10)
-Y.append(1)
+Y.append(0)
 
 app = dash.Dash(__name__)
+cpuReader = ProcStatReader(r"/proc/stat")
+print("read proc file")
 
 app.layout = html.Div(
 	[
+		html.H1("Task Manager", style={'text-align':'center'}),
+
 		dcc.Graph(id = 'live-graph', animate = True),
 		dcc.Interval(
 			id = 'graph-update',
@@ -34,7 +41,7 @@ app.layout = html.Div(
 )
 def update_graph_scatter(n):
 	X.append(X[-1]+ INTERVAL_TIME)
-	Y.append(Y[-1]+Y[-1] * random.uniform(-0.1,0.1))
+	Y.append(cpuReader.get_cputotal_util()["user"])
 
 	data = plotly.graph_objs.Scatter(
 			x=list(X),

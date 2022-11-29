@@ -10,3 +10,9 @@ class CPUReading:
 
     def print(self):
         print(self.cpu_total)
+        print(self.cpu0)
+        print(self.cpu1)
+        print(self.cpu2)
+        print(self.cpu3)
+        print(self.num_interrupts)
+        print(self.num_context_switches)

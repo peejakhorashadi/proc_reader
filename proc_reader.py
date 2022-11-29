@@ -6,7 +6,8 @@ from cpu import CPUReading
 
 PROC_FILEPATH = "/proc/stat"
 INTERVAL_TIME = 1
-data = deque([CPUReading(), CPUReading()], maxlen=10)  
+data = deque([CPUReading(), CPUReading(),CPUReading()], maxlen=10)  
+
 
 class ProcStatReader:
     def __init__(self, file_name):
@@ -26,6 +27,8 @@ class ProcStatReader:
 
 
 def get_interval(reading1:CPUReading, reading2:CPUReading):
+    # get wall time between two CPU Readings by computing the delta from time spent in user mode, sys mode, and idle mode
+    # return the aggregate of these metrics to get more accurate interval than sleep time
     delta_user = reading2.cpu_total["user"] - reading1.cpu_total["user"]
     delta_sys = reading2.cpu_total["sys"] - reading1.cpu_total["sys"]
     delta_idle = reading2.cpu_total["idle"] - reading1.cpu_total["idle"]
